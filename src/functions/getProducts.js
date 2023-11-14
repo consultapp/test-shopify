@@ -24,7 +24,7 @@ const firstTenProducts = {
       }`,
 };
 
-async function getProducts(query: { query: string } = firstTenProducts) {
+async function getProducts(query = firstTenProducts) {
   try {
     const response = await fetch(
       `${process.env.SHOPIFY_GRAPHQL_URL}${LATEST_API_VERSION}/graphql.json`,
@@ -45,7 +45,7 @@ async function getProducts(query: { query: string } = firstTenProducts) {
 
     const { data } = await response.json();
     const p = data.products?.edges;
-    const result: Products = p.map((item: { node: {} }) => item.node);
+    const result = p.map((item) => item.node);
 
     return result;
   } catch (error) {
@@ -53,3 +53,32 @@ async function getProducts(query: { query: string } = firstTenProducts) {
   }
 }
 export default getProducts;
+
+// async function getProducts(query: { query: string } = firstTenProducts) {
+//   try {
+//     const response = await fetch(
+//       `${process.env.SHOPIFY_GRAPHQL_URL}${LATEST_API_VERSION}/graphql.json`,
+//       {
+//         method: "POST",
+//         mode: "cors",
+//         cache: "no-cache",
+//         credentials: "same-origin",
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-Shopify-Access-Token": process.env.SHOPIFY_TOKEN,
+//         },
+//         referrerPolicy: "no-referrer",
+//         body: JSON.stringify(query),
+//       }
+//     );
+//     // return response.json();
+
+//     const { data } = await response.json();
+//     const p = data.products?.edges;
+//     const result: Products = p.map((item: { node: {} }) => item.node);
+
+//     return result;
+//   } catch (error) {
+//     return error;
+//   }
+// }
