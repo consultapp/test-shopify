@@ -41,14 +41,15 @@ async function getProducts(query: { query: string } = firstTenProducts) {
         body: JSON.stringify(query),
       }
     );
+    // return response.json();
 
-    const { data } = response.json();
+    const { data } = await response.json();
     const p = data.products?.edges;
-    const result: Products = data.map((item: { node: {} }) => item.node);
-    console.log("first", data, result);
-    return JSON.stringify(result);
+    const result: Products = p.map((item: { node: {} }) => item.node);
+
+    return result;
   } catch (error) {
-    return JSON.stringify(error);
+    return error;
   }
 }
 export default getProducts;
