@@ -1,6 +1,7 @@
 import { Product } from "@/types";
 import React, { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
+import "./style.module.scss";
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
