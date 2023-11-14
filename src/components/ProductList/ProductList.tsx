@@ -1,7 +1,7 @@
 import { Product } from "@/types";
 import React, { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
-import "./style.module.scss";
+import styles from "./style.module.scss";
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
@@ -31,7 +31,7 @@ export default function ProductList() {
   }
 
   return (
-    <div className="productCards">
+    <div className={styles.productList}>
       {products.map((product: Product) => (
         <ProductCard product={product} key={product.id} />
       ))}

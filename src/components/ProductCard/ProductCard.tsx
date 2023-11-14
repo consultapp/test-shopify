@@ -1,7 +1,7 @@
 import { createMarkup } from "@/functions/utils";
 import { Product } from "@/types";
 import React from "react";
-import "./style.module.scss";
+import styles from "./style.module.scss";
 
 interface IProductCard {
   product: Product;
@@ -10,13 +10,15 @@ interface IProductCard {
 export default function ProductCard({ product }: IProductCard) {
   console.log("product", product);
   return (
-    <div className="productCard">
-      <img
-        className="productCard__image"
-        style={{ background: `url('${product.images?.nodes[0].src}')` }}
+    <div className={styles.productCard}>
+      <canvas
+        className={styles.productCard__image}
+        style={{
+          backgroundImage: `url('${product.images?.nodes[0].src}')`,
+        }}
       />
       <div
-        className="productCard__info"
+        className={styles.productCard__info}
         dangerouslySetInnerHTML={createMarkup(product.bodyHtml)}
       />
     </div>
